@@ -19,7 +19,7 @@ const Review = db.define('reviews', {
   timestamps: false
 })
 
-const Photos = db.define('photos', {
+const Photo = db.define('photos', {
   id: { type: DataTypes.INTEGER, primaryKey: true },
   review_id: { type: DataTypes.INTEGER },
   url: { type: DataTypes.TEXT }
@@ -27,27 +27,65 @@ const Photos = db.define('photos', {
   timestamps: false
 })
 
-Review.hasMany(Photos, { foreignKey: 'review_id' })
-Photos.belongsTo(Review, { foreignKey: 'id' })
+Review.hasMany(Photo, { foreignKey: 'review_id' })
+Photo.belongsTo(Review, { foreignKey: 'id' })
 
 module.exports = {
   Review,
+
+  // getReviews: (product_id, cb) => {
+  //   Review.findAll({
+  //     where: {
+  //       product_id: product_id
+  //     },
+  //     raw: true,
+  //     include: [
+  //       {
+  //         model: Photos,
+  //         raw: true
+  //       }
+  //     ]
+  //     // limit: 10
+  //   })
+  //   .then(r => !r.length ? cb(err) : cb(null, r))
+  //   .catch(err => cb(err))
+  // },
+
   getReviews: (product_id, cb) => {
     Review.findAll({
       where: {
         product_id: product_id
       },
-      raw: true,
-      include: [
-        {
-          model: Photos,
-          raw: true
-        }
-      ]
-      // limit: 10
+      raw: true
     })
-    .then(r => !r.length ? cb(err) : cb(null, r))
-    .catch(err => cb(err))
+    .then(reviews => {
+      reviews.map(review => {
+        const review_id = review.id
+        return Photo.findAll({
+          where: {
+            review_id: review_id
+          },
+          raw: true
+        })
+        .then(photos => {
+          return photos.map(photo => {
+            return {
+              id: photo.id,
+              url: photo.url
+            }
+          })
+        })
+        .then(photosArray => {
+          const r = {
+            ...review,
+            photos: photosArray
+          }
+          console.log(r)
+          // !reviews.length ? cb(err) : cb(null, r)
+        })
+        .catch(err => cb(err))
+      })
+    })
   },
 
   postReview: (data, cb) => {
