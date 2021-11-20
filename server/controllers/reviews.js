@@ -5,13 +5,26 @@ module.exports = {
     const { product_id, page = 0, count = 5 } = req.query
     !product_id && res.status(422).send('Error: invalid product_id provided')
     models.reviews.getReviews(product_id, (err, r) => {
-      const rformat =  {
+      const newResult = r.map(d => {
+        return {
+          review_id: d.id,
+          rating: d.rating,
+          summary: d.summary,
+          recommend: d.recommend,
+          response: d.response,
+          body: d.body,
+          date: d.date,
+          reviewer_name: d.reviewer_name,
+          helpfulness: d.helpfulness
+        }
+      })
+      const formattedResult =  {
         product: product_id,
         page,
         count,
-        results: r
+        results: newResult
       }
-      err ? res.status(422).send('Error: invalid product_id provided') : res.status(200).send(rformat)
+      err ? res.status(422).send('Error: invalid product_id provided') : res.status(200).send(formattedResult)
     })
   },
 
