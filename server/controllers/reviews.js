@@ -1,31 +1,61 @@
-const models = require('../models')
+const models = require("../models");
 
 module.exports = {
-  get: (req, res) => {
-    const { product_id, page = 0, count = 5 } = req.query
-    !product_id && res.status(422).send('Error: invalid product_id provided')
-    models.reviews.getReviews(product_id, (err, r) => {
-      const newResult = r.map(d => {
-        return {
-          review_id: d.id,
-          rating: d.rating,
-          summary: d.summary,
-          recommend: d.recommend,
-          response: d.response,
-          body: d.body,
-          date: d.date,
-          reviewer_name: d.reviewer_name,
-          helpfulness: d.helpfulness
+  get: async (req, res) => {
+    try {
+      const { product_id, page = 0, count = 5 } = req.query;
+      !product_id && res.status(422).send("Error: invalid product_id provided");
+      const reviewsAndPhotos = await models.reviews.getReviews(product_id);
+      const reviews = reviewsAndPhotos.reviews;
+      const photos = reviewsAndPhotos.photos;
+
+      const filteredReviews = [];
+
+      for (let i = 0; i < reviews.length; i++) {
+        if (!reviews[i].reported) {
+          filteredReviews.push(reviews[i]);
         }
-      })
-      const formattedResult =  {
+      }
+
+      const newReviews = filteredReviews.map((r) => {
+        return {
+          review_id: r.id,
+          rating: r.rating,
+          summary: r.summary,
+          recommend: r.recommend,
+          response: r.response,
+          body: r.body,
+          date: r.date,
+          reviewer_name: r.reviewer_name,
+          helpfulness: r.helpfulness,
+          photos: [],
+        };
+      });
+
+      for (let i = 0; i < newReviews.length; i++) {
+        for (let j = 0; j < photos.length; j++) {
+          if (photos[j].length > 0) {
+            for (let k = 0; k < photos[j].length; k++) {
+              if (newReviews[i].review_id === photos[j][k].review_id) {
+                delete photos[j][k].review_id;
+                newReviews[i].photos = photos[j];
+              }
+            }
+          }
+        }
+      }
+
+      const formattedResult = {
         product: product_id,
         page,
         count,
-        results: newResult
-      }
-      err ? res.status(422).send('Error: invalid product_id provided') : res.status(200).send(formattedResult)
-    })
+        results: newReviews,
+      };
+
+      res.status(200).send(formattedResult);
+    } catch (err) {
+      res.status(422).send("Error: invalid product_id provided");
+    }
   },
 
   post: (req, res) => {
@@ -33,5 +63,5 @@ module.exports = {
     // models.reviews.postReview(req.body, (err, r) => {
     //   err ? console.error('error posting review - controller', err) : console.log('successfully posted review', r)
     // })
-  }
-}
+  },
+};
