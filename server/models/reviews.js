@@ -42,6 +42,7 @@ module.exports = {
       const reviews = await Review.findAll({
         where: {
           product_id: product_id,
+          reported: false,
         },
         raw: true,
       });
