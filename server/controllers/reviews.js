@@ -9,15 +9,7 @@ module.exports = {
       const reviews = reviewsAndPhotos.reviews;
       const photos = reviewsAndPhotos.photos;
 
-      const filteredReviews = [];
-
-      for (let i = 0; i < reviews.length; i++) {
-        if (!reviews[i].reported) {
-          filteredReviews.push(reviews[i]);
-        }
-      }
-
-      const newReviews = filteredReviews.map((r) => {
+      const newReviews = reviews.map((r) => {
         return {
           review_id: r.id,
           rating: r.rating,
