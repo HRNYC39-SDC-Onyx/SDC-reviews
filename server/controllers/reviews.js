@@ -12,10 +12,13 @@ module.exports = {
     }
   },
 
-  post: (req, res) => {
-    // console.log(req.body);
-    // models.reviews.postReview(req.body, (err, r) => {
-    //   err ? console.error('error posting review - controller', err) : console.log('successfully posted review', r)
-    // })
+  post: async (req, res) => {
+    try {
+      const review = req.body;
+      await models.reviews.postReview(review);
+      res.status(201).send("Created");
+    } catch (err) {
+      res.status(422).send("Review body contains invalid entries");
+    }
   },
 };
