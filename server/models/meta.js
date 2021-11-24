@@ -101,14 +101,14 @@ module.exports = {
         formattedChars[char].value = formattedCharsRatings[id];
       }
 
-      const result = {
+      const meta = {
         product_id,
         ratings: formattedRatings,
         recommended: formattedRecommended,
         characteristics: formattedChars,
       };
 
-      return result;
+      return meta;
     } catch (err) {
       console.error(err);
     }
