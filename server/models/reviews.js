@@ -137,6 +137,7 @@ module.exports = {
       const reviewer_email = review.email;
       const photos = review.photos;
       const characteristics = review.characteristics;
+
       const newReview = await Review.create({
         product_id,
         rating,
@@ -147,8 +148,8 @@ module.exports = {
         reviewer_name,
         reviewer_email,
       });
+
       const review_id = newReview.id;
-      console.log("r_id", review_id);
 
       photos.forEach((p) => {
         const url = p;
