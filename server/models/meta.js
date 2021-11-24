@@ -1,7 +1,6 @@
-const e = require("express");
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../../db");
-const { Review } = require("../models/reviews.js");
+const { Review, CharacteristicReview } = require("./reviews.js");
 
 const Characteristic = db.define(
   "characteristics",
@@ -14,22 +13,6 @@ const Characteristic = db.define(
     timestamps: false,
   }
 );
-
-const CharacteristicReview = db.define(
-  "characteristics_reviews",
-  {
-    id: { type: DataTypes.INTEGER, primaryKey: true },
-    characteristics_id: { type: DataTypes.INTEGER },
-    review_id: { type: DataTypes.INTEGER },
-    value: { type: DataTypes.SMALLINT },
-  },
-  {
-    timestamps: false,
-  }
-);
-
-Review.hasMany(CharacteristicReview, { foreignKey: "review_id" });
-CharacteristicReview.belongsTo(Review, { foreignKey: "id" });
 
 module.exports = {
   getMeta: async (product_id) => {
@@ -47,7 +30,7 @@ module.exports = {
       });
 
       const formattedRatings = {};
-      const formatRatings = ratings.forEach((r) => {
+      ratings.forEach((r) => {
         const rating = r.rating;
         const count = r.count;
         formattedRatings[rating] = count;
@@ -66,7 +49,7 @@ module.exports = {
       });
 
       const formattedRecommended = {};
-      const formatRecommended = recommended.forEach((r) => {
+      recommended.forEach((r) => {
         const recommened = r.recommend;
         const count = r.count;
         formattedRecommended[recommened] = count;
@@ -80,7 +63,7 @@ module.exports = {
       });
 
       const formattedChars = {};
-      const formatChars = chars.forEach((c) => {
+      chars.forEach((c) => {
         const name = c.name;
         const chars_id = c.id;
         formattedChars[name] = {
@@ -100,7 +83,7 @@ module.exports = {
       });
 
       const formattedCharsRatings = {};
-      const formatCharsRatings = chars_ratings.forEach((c) => {
+      chars_ratings.forEach((c) => {
         c.characteristics_reviews.forEach((cr, i) => {
           const char_id = cr.dataValues.characteristics_id;
           const value = cr.dataValues.value;
