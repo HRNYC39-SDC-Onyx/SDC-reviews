@@ -22,14 +22,14 @@ CREATE TABLE IF NOT EXISTS reviews
 
 CREATE TABLE IF NOT EXISTS characteristics
 (
-  id SERIAL,
+  id SERIAL PRIMARY KEY,
   product_id INT,
   name TEXT
 );
 
 CREATE TABLE IF NOT EXISTS characteristics_reviews
 (
-  id SERIAL,
+  id SERIAL PRIMARY KEY,
   characteristics_id INT,
   review_id INT,
   value SMALLINT,
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS characteristics_reviews
 
 CREATE TABLE IF NOT EXISTS photos
 (
-  id SERIAL,
+  id SERIAL PRIMARY KEY,
   review_id INT,
   url TEXT,
   FOREIGN KEY(review_id) REFERENCES reviews(id)
