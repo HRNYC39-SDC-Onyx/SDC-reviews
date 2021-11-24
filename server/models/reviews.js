@@ -34,28 +34,56 @@ const Photo = db.define(
   }
 );
 
+Review.hasMany(Photo, { foreignKey: "review_id" });
+Photo.belongsTo(Review, { foreignKey: "id" });
+
 module.exports = {
   Review,
 
-  getReviews: async (product_id) => {
+  getReviews: async (product_id, page, count) => {
     try {
       const reviews = await Review.findAll({
+        limit: count,
+        offset: page * count,
         where: {
           product_id: product_id,
           reported: false,
         },
-        raw: true,
+        include: [
+          {
+            model: Photo,
+          },
+        ],
       });
-      const photos = await Promise.all(
-        reviews.map((r) => {
-          const review_id = r.id;
-          return Photo.findAll({
-            where: { review_id: review_id },
-            raw: true,
-          });
-        })
-      );
-      return { reviews, photos };
+
+      const formattedReviews = reviews.map((r) => {
+        return {
+          review_id: r.dataValues.id,
+          rating: r.dataValues.rating,
+          summary: r.dataValues.summary,
+          recommend: r.dataValues.recommend,
+          response: r.dataValues.response,
+          body: r.dataValues.body,
+          date: r.dataValues.date,
+          reviewer_name: r.dataValues.reviewer_name,
+          helpfulness: r.dataValues.helpfulness,
+          photos: r.dataValues.photos.map((p) => {
+            return {
+              id: p.id,
+              url: p.url,
+            };
+          }),
+        };
+      });
+
+      const completeReviews = {
+        product: product_id,
+        page,
+        count,
+        results: formattedReviews,
+      };
+
+      return completeReviews;
     } catch (err) {
       console.error(err);
     }
