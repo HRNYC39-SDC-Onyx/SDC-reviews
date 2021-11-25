@@ -121,7 +121,7 @@ module.exports = {
 
       return completeReviews;
     } catch (err) {
-      console.error(err);
+      throw new Error(err);
     }
   },
 
@@ -168,7 +168,7 @@ module.exports = {
         });
       });
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
     }
   },
 };
