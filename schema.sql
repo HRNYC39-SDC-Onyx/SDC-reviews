@@ -20,12 +20,16 @@ CREATE TABLE IF NOT EXISTS reviews
   helpfulness INT
 );
 
+CREATE INDEX r_p_id_index ON reviews(product_id);
+
 CREATE TABLE IF NOT EXISTS characteristics
 (
   id SERIAL PRIMARY KEY,
   product_id INT,
   name TEXT
 );
+
+CREATE INDEX c_p_id_index ON characteristics(product_id);
 
 CREATE TABLE IF NOT EXISTS characteristics_reviews
 (
@@ -36,6 +40,8 @@ CREATE TABLE IF NOT EXISTS characteristics_reviews
   FOREIGN KEY(review_id) REFERENCES reviews(id)
 );
 
+CREATE INDEX cr_r_id_index ON characteristics_reviews(review_id);
+
 CREATE TABLE IF NOT EXISTS photos
 (
   id SERIAL PRIMARY KEY,
@@ -43,6 +49,8 @@ CREATE TABLE IF NOT EXISTS photos
   url TEXT,
   FOREIGN KEY(review_id) REFERENCES reviews(id)
 );
+
+CREATE INDEX p_r_id_index ON photos(review_id);
 
 COPY reviews FROM '/Users/jaimie/Desktop/data/reviews.csv' DELIMITER ',' CSV HEADER;
 COPY characteristics FROM '/Users/jaimie/Desktop/data/characteristics.csv' DELIMITER ',' CSV HEADER;
