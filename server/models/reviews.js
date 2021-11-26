@@ -80,7 +80,7 @@ module.exports = {
     try {
       const reviews = await Review.findAll({
         limit: count,
-        offset: page * count,
+        offset: (page - 1) * count,
         where: {
           product_id: product_id,
           reported: false,
@@ -127,16 +127,18 @@ module.exports = {
 
   postReview: async (review) => {
     try {
-      const product_id = review.product_id;
-      const rating = review.rating;
+      const {
+        product_id,
+        rating,
+        summary,
+        body,
+        recommend,
+        name,
+        email,
+        photos,
+        characteristics,
+      } = review;
       const date = new Date();
-      const summary = review.summary;
-      const body = review.body;
-      const recommend = review.recommend;
-      const reviewer_name = review.name;
-      const reviewer_email = review.email;
-      const photos = review.photos;
-      const characteristics = review.characteristics;
 
       const newReview = await Review.create({
         product_id,
@@ -145,8 +147,8 @@ module.exports = {
         summary,
         body,
         recommend,
-        reviewer_name,
-        reviewer_email,
+        reviewer_name: name,
+        reviewer_email: email,
       });
 
       const review_id = newReview.id;
