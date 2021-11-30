@@ -17,16 +17,16 @@ An API for everything FEC reviews related!
 
 2. Navigate into the forked repo and clone it onto your local machine by clicking on the green 'CODE' button, selecting the 'HTTPS' tab and copying the link below it.
 
-3. In your terminal, run the command `git clone LINK_TO_FORKED_REPO`
+3. In the directory on your local machine that you wish to clone the repo, run the command `git clone LINK_TO_FORKED_REPO` in your terminal.
 
-4. To open the repo on your local machine, `cd` into it and run `git code .` (this opens VS Code)
+4. To open the repo on your local machine, `cd` into it and run `code .` (this opens VS Code)
 
-5. In the root directory, run the command `npm install` to install all of the app's dependencies.
+5. In the root directory, run the command `npm run install` to install all of the app's dependencies.
 
 ## Setup
 1. Create a `config.js` file using the provided `config.example.js` file with your postgreSQL credentials.
 
-2. Navigate to the `schema.sql` file and **replace the file paths on line 55-58** with YOUR OWN FILE PATH to the data that you downloaded.
+2. Navigate to the `schema.sql` file and **replace the file paths on line 55-58** with YOUR OWN FILE PATHS to the data that you downloaded.
 
 3. Run `npm start` in the root directory to run this project.
 
