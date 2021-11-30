@@ -2,7 +2,7 @@
 An API for everything FEC reviews related!
 
 ## Getting Started: 
-1. Install PostgerSQL:
+1. Install PostgreSQL:
    - via Homebrew: https://formulae.brew.sh/formula/postgresql
    - via PostgreSQL website: https://www.postgresql.org/download/
 
