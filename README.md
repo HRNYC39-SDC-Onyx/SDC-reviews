@@ -2,11 +2,14 @@
 An API for everything FEC reviews related!
 
 ## Getting Started: 
-1. Install PostgreSQL:
+1. Install Git:
+   - via Git website: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+2. Install PostgreSQL:
    - via Homebrew: https://formulae.brew.sh/formula/postgresql
    - via PostgreSQL website: https://www.postgresql.org/download/
 
-2. Download the data onto your local machine. You need 4 files:
+3. Download the data onto your local machine. You need 4 files:
    - reviews.csv
    - characteristics.csv
    - characteristic_reviews.csv
@@ -19,7 +22,7 @@ An API for everything FEC reviews related!
 
 3. In the directory on your local machine that you wish to clone the repo, run the command `git clone LINK_TO_FORKED_REPO` in your terminal.
 
-4. To open the repo on your local machine, `cd` into it and run `code .` (this opens VS Code)
+4. To open the repo on your local machine, `cd` into it and run `code .` (this opens VS Code, but you can use your own code editor)
 
 5. In the root directory, run the command `npm run install` to install all of the app's dependencies.
 
