@@ -21,4 +21,4 @@ An API for everything FEC reviews related!
 ```bash
 git clone LINK_TO_FORKED_REPO
 ```
-*Replace LINK_TO_FORKED_REPO with the link you copied.
+**Replace _LINK_TO_FORKED_REPO_ with the link you copied.**
