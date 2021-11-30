@@ -28,7 +28,7 @@ An API for everything FEC reviews related!
 
 2. Navigate to the `schema.sql` file and **replace the file paths on line 55-58** with YOUR OWN FILE PATHS to the data that you downloaded.
 
-3. Run `npm start` in the root directory to run this project.
+3. Run `npm run start` to run this project.
 
-4. Run `npm createdb` in a seperate terminal window. This will create the database and tables for you in postgreSQL.
+4. Run `npm run createdb` in a seperate terminal window. This will create the database and tables for you in postgreSQL.
 
