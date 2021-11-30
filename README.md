@@ -17,6 +17,4 @@ An API for everything FEC reviews related!
 
 2. Navigate into the forked repo and clone it onto your local machine by clicking on the green 'CODE' button, selecting the 'HTTPS' tab and copying the link below it.
 
-3. In your terminal, run the command:
-`git clone LINK_TO_FORKED_REPO`
-**Replace _LINK_TO_FORKED_REPO_ with the link you copied.**
+3. In your terminal, run the command `git clone LINK_TO_FORKED_REPO`
