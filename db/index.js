@@ -1,17 +1,17 @@
-const { Sequelize } = require('sequelize')
-const { host, port, database } = require('../config.js')
+const { Sequelize } = require("sequelize");
+const { host, port, database, user } = require("../config.js");
 
-const db = new Sequelize(`postgres://${host}:${port}/${database}`)
+const db = new Sequelize(`postgres://${host}:${port}/${database}`, user);
 
 const dbConnection = async () => {
   try {
-    await db.authenticate()
-    console.log('successfully connected to postgres db!')
+    await db.authenticate();
+    console.log("successfully connected to postgres db!");
   } catch (err) {
-    console.error('error connecting to postgres db', err)
+    console.error("error connecting to postgres db", err);
   }
-}
+};
 
-dbConnection()
+dbConnection();
 
-module.exports = db
+module.exports = db;

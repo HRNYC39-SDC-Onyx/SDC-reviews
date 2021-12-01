@@ -167,6 +167,7 @@ module.exports = {
           characteristics_id: id,
           review_id,
           value,
+          ra,
         });
       });
     } catch (err) {
