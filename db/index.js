@@ -1,20 +1,7 @@
 const { Sequelize } = require("sequelize");
-const { host, port, database, user, password } = require("../config.js");
+const { host, port, database } = require("../config.js");
 
-const db = new Sequelize({
-  database,
-  username: user,
-  password,
-  host,
-  port,
-  dialect: "postgres",
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false, // <<<<<<< YOU NEED THIS
-    },
-  },
-});
+const db = new Sequelize(`postgres://${host}:${port}/${database}`);
 
 const dbConnection = async () => {
   try {
