@@ -1,7 +1,9 @@
 // Change PORT NUMBER from string to number
 
 module.exports = {
-  host: 'YOUR LOCAL HOST',
-  database: 'YOUR DATABASE',
-  port: 'PORT NUMBER'
-}
+  user: "YOUR USER",
+  password: "YOUR PASSWORD",
+  host: "YOUR LOCAL HOST",
+  database: "YOUR DATABASE",
+  port: "PORT NUMBER",
+};
