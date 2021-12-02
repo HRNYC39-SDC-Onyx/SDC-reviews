@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS photos
 
 CREATE INDEX p_r_id_index ON photos(review_id);
 
-COPY reviews FROM '/Users/jaimie/Desktop/data/reviews.csv' DELIMITER ',' CSV HEADER;
-COPY characteristics FROM '/Users/jaimie/Desktop/data/characteristics.csv' DELIMITER ',' CSV HEADER;
-COPY characteristics_reviews FROM '/Users/jaimie/Desktop/data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER;
-COPY photos FROM '/Users/jaimie/Desktop/data/reviews_photos.csv' DELIMITER ',' CSV HEADER;
+COPY reviews FROM '/Users/jaimie/Desktop/hrnyc39/SDC-reviews/data/reviews.csv' DELIMITER ',' CSV HEADER;
+COPY characteristics FROM '/Users/jaimie/Desktop/hrnyc39/SDC-reviews/data/characteristics.csv' DELIMITER ',' CSV HEADER;
+COPY characteristics_reviews FROM '/Users/jaimie/Desktop/hrnyc39/SDC-reviews/data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER;
+COPY photos FROM '/Users/jaimie/Desktop/hrnyc39/SDC-reviews/data/reviews_photos.csv' DELIMITER ',' CSV HEADER;
