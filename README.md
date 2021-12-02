@@ -36,6 +36,6 @@ An API for everything FEC reviews related!
 4. Run `npm run createdb` in a seperate terminal window. This will create the database and tables for you in postgreSQL.
 
 ## Testing
-1. To test the load of 'GET' requests, run `npm run test-load` in the terminal.
+1. To test the load of the 'GET' requests, run `npm run test-load` in the terminal.
 
-2. To test the functionality of 'PUT' and 'POST' requests, run `npm run test-func` in the terminal.
+2. To test the functionalities of the 'PUT' and 'POST' requests, run `npm run test-func` in the terminal.
