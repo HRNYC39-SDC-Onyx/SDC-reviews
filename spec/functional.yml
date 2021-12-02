@@ -1,0 +1,40 @@
+config:
+  target: "http://127.0.0.1:3000/reviews"
+  phases:
+    - duration: 10
+      arrivalRate: 1
+  variables:
+    rating:
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+    recommended:
+      - "true"
+      - "false"
+
+scenarios:
+  - name: "Mark a review as helpful, report a review, or post a review"
+    flow:
+      - put:
+          url: "/{{ $randomNumber(1, 5777926) }}/helpful"
+      - put:
+          url: "/{{ $randomNumber(1, 5777926) }}/report"
+      - post:
+          url: "/"
+          json:
+            product_id: "7"
+            rating: "{{ rating }}"
+            summary: "{{ $randomString() }}"
+            body: "{{ $randomString() }}"
+            recommend: "{{ recommended }}"
+            name: "{{ $randomString() }}"
+            email: "{{ $randomString() }}@{{ $randomString() }}.com"
+            characteristics:
+              {
+                "22": "{{ rating }}",
+                "23": "{{ rating }}",
+                "24": "{{ rating }}",
+                "25": "{{ rating }}",
+              }

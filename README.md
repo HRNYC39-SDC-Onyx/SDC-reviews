@@ -34,4 +34,3 @@ An API for everything FEC reviews related!
 3. Run `npm run start` to run this project.
 
 4. Run `npm run createdb` in a seperate terminal window. This will create the database and tables for you in postgreSQL.
-

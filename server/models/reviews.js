@@ -135,7 +135,7 @@ module.exports = {
         recommend,
         name,
         email,
-        photos,
+        photos = [],
         characteristics,
       } = review;
       const date = new Date();
@@ -167,7 +167,6 @@ module.exports = {
           characteristics_id: id,
           review_id,
           value,
-          ra,
         });
       });
     } catch (err) {
