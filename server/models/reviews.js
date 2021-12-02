@@ -135,7 +135,7 @@ module.exports = {
         recommend,
         name,
         email,
-        photos,
+        photos = [],
         characteristics,
       } = review;
       const date = new Date();
