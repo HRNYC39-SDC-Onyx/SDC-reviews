@@ -5,7 +5,7 @@
   "scripts": {
     "test-load": "artillery run ./spec/load.yml",
     "test-func": "artillery run ./spec/functional.yml",
-    "start": "npx nodemon ./server/app.js",
+    "start": "node ./server/app.js",
     "createdb": "psql postgres < schema.sql"
   },
   "repository": {
